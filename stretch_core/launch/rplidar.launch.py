@@ -41,7 +41,6 @@ def generate_launch_description():
         'config',
         'laser_filter_params.yaml'
         )
-    
     lidar_node = Node(
             package='sllidar_ros2',
             executable='sllidar_node',

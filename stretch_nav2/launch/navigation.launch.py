@@ -62,7 +62,12 @@ def generate_launch_description():
     rviz_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([navigation_bringup_path, '/launch/rviz_launch.py']),
         condition=IfCondition(LaunchConfiguration('use_rviz')))
-
+    tf_map_to_odom = Node(package = "tf2_ros", 
+                    executable = "static_transform_publisher",
+                    arguments = ["0", "0", "0", "0", "0", "0", "1", "map", "odom"])
+    # tf_camera_to_baselink = Node(package = "tf2_ros", 
+    #                 executable = "static_transform_publisher",
+    #                 arguments = ["0", "0", "0", "0", "0", "0", "1", "map", "odom"])
     return LaunchDescription([
         teleop_type_param,
         use_sim_time_param,
@@ -75,4 +80,5 @@ def generate_launch_description():
         base_teleop_launch,
         navigation_bringup_launch,
         rviz_launch,
+        tf_map_to_odom,
     ])
